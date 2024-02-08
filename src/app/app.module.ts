@@ -49,7 +49,10 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-
+import { CategoryComponent } from './views/admin/category/category.component';
+import { ProductComponent } from './views/admin/product/product.component';
+import { SalesComponent } from './views/admin/sales/sales.component';
+import { ReactiveFormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,8 +89,12 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     IndexComponent,
     LandingComponent,
     ProfileComponent,
+    CategoryComponent,
+    ProductComponent,
+    SalesComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp({
