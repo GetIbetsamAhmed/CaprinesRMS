@@ -41,6 +41,7 @@ export class CategoryComponent implements OnInit {
     this, this.categoryform.patchValue({
       name: ""
     })
+    this.categorySelectedKey = "";
     this.image = "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png";
   }
 
