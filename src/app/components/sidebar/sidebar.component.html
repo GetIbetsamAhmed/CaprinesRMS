@@ -92,27 +92,27 @@
 
         <li class="items-center">
           <a [routerLink]="['/admin/category']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
-            #adminTables="routerLinkActive" [ngClass]="
-                                adminTables.isActive
+            #adminCategory="routerLinkActive" [ngClass]="
+                                adminCategory.isActive
                                   ? 'text-red-600 hover:text-red-700'
                                   : 'text-blueGray-700 hover:text-blueGray-500'
                               ">
             <i class="fas fa-table mr-2 text-sm" [ngClass]="
-                                  adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
+                                  adminCategory.isActive ? 'opacity-75' : 'text-blueGray-300'
                                 "></i>
-            Cattegory
+            Category
           </a>
           </li>
           
           <li class="items-center">
             <a [routerLink]="['/admin/product']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
-              #adminTables="routerLinkActive" [ngClass]="
-                                adminTables.isActive
+              #productTables="routerLinkActive" [ngClass]="
+                                productTables.isActive
                                   ? 'text-red-600 hover:text-red-700'
                                   : 'text-blueGray-700 hover:text-blueGray-500'
                               ">
               <i class="fas fa-table mr-2 text-sm" [ngClass]="
-                                  adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
+                                  productTables.isActive ? 'opacity-75' : 'text-blueGray-300'
                                 "></i>
               Product
             </a>
@@ -120,13 +120,13 @@
           
           <li class="items-center">
             <a [routerLink]="['/admin/sales']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
-              #adminTables="routerLinkActive" [ngClass]="
-                                adminTables.isActive
+              #saleTables="routerLinkActive" [ngClass]="
+                                saleTables.isActive
                                   ? 'text-red-600 hover:text-red-700'
                                   : 'text-blueGray-700 hover:text-blueGray-500'
                               ">
               <i class="fas fa-table mr-2 text-sm" [ngClass]="
-                                  adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
+                                  saleTables.isActive ? 'opacity-75' : 'text-blueGray-300'
                                 "></i>
               Sales
             </a>
