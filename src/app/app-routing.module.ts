@@ -4,10 +4,13 @@ import { Routes, RouterModule } from "@angular/router";
 // layouts
 import { AdminComponent } from "./layouts/admin/admin.component";
 import { AuthComponent } from "./layouts/auth/auth.component";
+import { CategoryComponent } from "./views/admin/category/category.component";
 
 // admin views
 import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
 import { MapsComponent } from "./views/admin/maps/maps.component";
+import { ProductComponent } from "./views/admin/product/product.component";
+import { SalesComponent } from "./views/admin/sales/sales.component";
 import { SettingsComponent } from "./views/admin/settings/settings.component";
 import { TablesComponent } from "./views/admin/tables/tables.component";
 
@@ -29,7 +32,9 @@ const routes: Routes = [
       { path: "dashboard", component: DashboardComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },
-      { path: "maps", component: MapsComponent },
+      { path: "category", component: CategoryComponent },
+      { path: "product", component: ProductComponent },
+      { path: "sales", component: SalesComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

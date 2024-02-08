@@ -1,0 +1,83 @@
+<div class="flex flex-wrap">
+    <div class="w-full lg:w-8/12 px-4">
+
+        <div
+            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+            <div class="rounded-t bg-white mb-0 px-6 py-6">
+                <div class="text-center flex justify-between">
+                    <h6 class="text-blueGray-700 text-xl font-bold">Category Management</h6>
+                    <button (click)="actionCategory()"
+                        class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                        type="button">
+                        {{this.buttonName}}
+                    </button>
+                </div>
+            </div>
+            <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                <form [formGroup]="categoryform">
+                    <br>
+                    <div class="flex flex-wrap">
+                        <div class="w-full lg:w-12 px-4">
+                            <input id="file" (change)="onFileChanged($event)" type="file" accept="image/*" #file
+                                style="display: none">
+                            <img (click)="file.click()" src="{{image}}" width="20%" style="border-radius: 10px;" />
+                        </div>
+
+                        <div class="w-full lg:w-12 px-4">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Category Name
+                                </label>
+                                <input type="text" formControlName="name" placeholder="Bar B Que"
+                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="w-full lg:w-4/12 px-4">
+
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+            <div class="px-6">
+                <br>
+                <table class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                        <tr>
+                            <th
+                                class="bg-red-800 text-red-300 border-red-700 px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                Category name
+                            </th>
+
+                            <th
+                                class="bg-red-800 text-red-300 border-red-700 px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                Image
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr (click)="editCategory(objCategory)" *ngFor="let objCategory of categoryList">
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                <h2>{{objCategory.catName}}</h2>
+                            </td>
+
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                <img src="{{objCategory.catImg}}" width="30%" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
