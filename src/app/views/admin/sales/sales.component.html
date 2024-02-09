@@ -1,1 +1,116 @@
-<p>sales works!</p>
+<div class="flex flex-wrap">
+    <div class="w-full lg:w-8/12 px-4">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+            <div class="flex flex-wrap">
+                <div *ngFor="let objCat of categoryList" class="w-full lg:w-3/12 px-4" style="margin: 20px;">
+                    <h2 (click)="filterCategory(objCat)"
+                        style=" color:white;background-color: #991b1b; padding: 5px; border-radius: 10px; text-align: center;cursor: pointer">
+                        {{objCat.catName}}</h2>
+                </div>
+
+            </div>
+            <div class="flex flex-wrap">
+
+                <div *ngFor="let objProduct of filterProductList" class="w-full lg:w-3/12 px-4" style="margin: 20px;">
+                    <img (click)="productClick(objProduct)" src="{{objProduct.productImg}}" height="180px" width="180px"
+                        style="border-top-right-radius: 10px; border-top-left-radius: 10px;" />
+                    <h2 (click)="productClick(objProduct)"
+                        style=" color:white;background-color: #991b1b; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding: 2px; text-align: center; cursor: pointer;">
+                        {{objProduct.productName}}</h2>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <div class="w-full lg:w-4/12 px-4">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+            <div class="px-6">
+                <br>
+                <table *ngIf="this.orderCart.length > 0" class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                        <tr>
+                            <th
+                                class="bg-red-800 text-red-300 border-red-700 px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                Product Name
+                            </th>
+
+                            <th
+                                class="bg-red-800 text-red-300 border-red-700 px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                Quantity
+                            </th>
+                            <th
+                                class="bg-red-800 text-red-300 border-red-700 px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let objCart of orderCart">
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                <h2 style="font-size: 18px;">{{objCart.productName}}</h2>
+                            </td>
+
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                <h2 style="font-size: 18px;">{{objCart.quantity}}</h2>
+                            </td>
+                            <td (click)="delete(objCart)">D</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="calculateSummary()" *ngIf="this.orderCart.length > 0" data-toggle="modal"
+                    data-target="#exampleModal"
+                    class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                    style="width: 100%; background-color: #991b1b;" type="button">
+                    Review Order
+                </button>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" #childModal id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><b>Order Confirmation</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 style="font-size: 18px; margin-bottom: 3px;"><b>Product Quantity :</b>
+                    {{this.objSummary.productsQuanaity}}</h2>
+                <h2 style="font-size: 18px; margin-bottom: 3px;"><b>Product Discount :</b> {{this.objSummary.discount}}
+                </h2>
+                <h2 style="font-size: 18px; margin-bottom: 3px;"><b>Product Price :</b> {{this.objSummary.price}}</h2>
+                <h2 style="font-size: 18px; margin-bottom: 3px;"><b>Product Tax ( 17% GST ) :</b>
+                    {{this.objSummary.tax}}</h2>
+                <h2 style="font-size: 18px; margin-bottom: 3px;"><b>Product Total Amount :</b>
+                    {{this.objSummary.billAmount}}</h2>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" *ngIf="this.orderCart.length > 0"
+                            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                            style="background-color: #991b1b;" type="button">
+                            Close
+                        </button>
+                        <button *ngIf="this.orderCart.length > 0"
+                            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                            style="background-color: #991b1b;" type="button">
+                            <p (click)="createOrder()">Complete Order</p>
+                        </button>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
