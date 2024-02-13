@@ -97,11 +97,11 @@ export class SalesComponent implements OnInit {
   }
 
   createOrder() {
-    alert();
     const objParam = {
       orderDate: JSON.stringify(new Date()),
       orderProduct: this.orderCart,
-      orderSummary: this.objSummary
+      orderSummary: this.objSummary,
+      orderStatus: "P"
     }
     this.objFirebaseService.addDataIntoTable("salesOrder", objParam).then(data => {
       this.reset();

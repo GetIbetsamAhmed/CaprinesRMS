@@ -4,16 +4,13 @@
   "description": "Notus Angular - Free Tailwind CSS UI Kit and Admin by Creative Tim.",
   "repository": "https://github.com/creativetimofficial/notus-angular",
   "license": "MIT",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "build:tailwind": "tailwind build src/assets/styles/index.css -o src/assets/styles/tailwind.css",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm start"
-  },
+    "scripts": {
+      "ng": "ng",
+      "start": "ng serve",
+      "build": "ng build",
+      "watch": "ng build --watch --configuration development",
+      "test": "ng test"
+    },
   "dependencies": {
     "@angular/animations": "11.2.5",
     "@angular/common": "11.2.5",

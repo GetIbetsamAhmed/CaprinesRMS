@@ -35,7 +35,7 @@ const routes: Routes = [
       { path: "category", component: CategoryComponent },
       { path: "product", component: ProductComponent },
       { path: "sales", component: SalesComponent },
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      { path: "", redirectTo: "sales", pathMatch: "full" },
     ],
   },
   // auth views
