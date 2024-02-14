@@ -7,13 +7,6 @@
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 class="font-semibold text-base text-blueGray-700">All Order</h3>
             </div>
-            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
-                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button">
-                See all
-              </button>
-            </div>
           </div>
         </div>
         <div class="block w-full overflow-x-auto">
@@ -71,7 +64,7 @@
               <h3 class="font-semibold text-base text-blueGray-700">Pending Order</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
+              <button (click)="this.seeAll('P')"
                 class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
                 See all
@@ -136,7 +129,7 @@
               <h3 class="font-semibold text-base text-blueGray-700">Completed Orders</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
+              <button (click)="this.seeAll('C')"
                 class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
                 See all
@@ -199,7 +192,7 @@
               <h3 class="font-semibold text-base text-blueGray-700">Cenceled Orders</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
+              <button (click)="this.seeAll('R')"
                 class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
                 See all
@@ -255,6 +248,7 @@
     </div>
   </div>
 </div>
+
 <div *ngIf="this.seeMore !== ''">
   <div class="flex flex-wrap mt-4">
     <div class="w-full xl:w-12/12 mb-12 xl:mb-0 px-4">
@@ -262,24 +256,37 @@
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 class="font-semibold text-base text-blueGray-700">Completed Orders</h3>
+              <h3 class="font-semibold text-base text-blueGray-700">{{this.seeMore}}</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
+              <button (click)="this.goBack()"
                 class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
-                See all
+                Back
               </button>
             </div>
           </div>
         </div>
         <div class="block w-full overflow-x-auto">
+          <!-- <form class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
+                                                              <div class="relative flex w-full flex-wrap items-stretch">
+                                                                <span
+                                                                  class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"><i
+                                                                    class="fas fa-search"></i></span>
+                                                                <input type="text" placeholder="Search here..."
+                                                                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
+                                                              </div>
+                                                            </form> -->
           <!-- Projects table -->
           <table class="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
                 <th
                   class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                  Order #
+                  </th>
+                  <th
+                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Date
                 </th>
                 <th
@@ -294,11 +301,20 @@
                   class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                   Status
                 </th>
-        
+                <th *ngIf="this.seeMore === 'All Pending Orders'"
+                  class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                </th>
+                <th *ngIf="this.seeMore === 'All Pending Orders'"
+                  class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                </th>
+
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let allOrders of completedOrder">
+              <tr *ngFor="let allOrders of seeAllSelectedOrders;let rowIndex = index">
+                <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  {{allOrders.orderID}}
+                </td>
                 <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                   {{allOrders.orderDate}}
                 </th>
@@ -312,13 +328,30 @@
                   {{allOrders.orderStatus === 'P' ? 'Pending' : allOrders.orderStatus === 'C' ?
                   'Completed' : allOrders.orderStatus === 'R' ? 'Rejected' : ''}}
                 </td>
+                <td *ngIf="this.seeMore === 'All Pending Orders'"
+                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <button (click)="this.updateStatus('C',allOrders.key,rowIndex)"
+                    class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button">
+                    Mark Complete
+                  </button>
+                </td>
+                <td *ngIf="this.seeMore === 'All Pending Orders'"
+                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <button (click)="this.updateStatus('R',allOrders.key,rowIndex)"
+                    class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button">
+                    Mark Cencel
+                  </button>
+                </td>
+
               </tr>
-        
+
             </tbody>
           </table>
         </div>
-        </div>
+      </div>
 
     </div>
-    </div>
-    </div>
+  </div>
+  </div>

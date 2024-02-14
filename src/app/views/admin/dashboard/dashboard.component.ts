@@ -13,9 +13,46 @@ export class DashboardComponent implements OnInit {
   pendingOrder = [];
   completedOrder = [];
   rejectedOrder = [];
-
+  seeAllSelectedOrders = [];
   ngOnInit(): void {
     this.getAllorder();
+  }
+
+  goBack() {
+    this.seeAllSelectedOrders = [];
+    this.seeMore = '';
+  }
+
+  seeAll(param: string) {
+    if (param === 'P') {
+      this.seeMore = "All Pending Orders";
+      this.seeAllSelectedOrders = this.allOrderList.filter(data => data.orderStatus === 'P');
+    } else if (param === 'C') {
+      this.seeMore = "All Completed Orders";
+      this.seeAllSelectedOrders = this.allOrderList.filter(data => data.orderStatus === 'C');
+    } else if (param === 'R') {
+      this.seeMore = "All Cencled Orders";
+      this.seeAllSelectedOrders = this.allOrderList.filter(data => data.orderStatus === 'R');
+    }
+
+  }
+
+  updateStatus(param: string, key: string, index: any) {
+    if (param === 'C') {
+      //Completed
+      this.objFirebaseService.updateDataIntoTable("salesOrder", key, {
+        orderStatus: 'C'
+      }).then(data => {
+        this.seeAllSelectedOrders.splice(index, 1);
+      })
+    } else {
+      //Rejected
+      this.objFirebaseService.updateDataIntoTable("salesOrder", key, {
+        orderStatus: 'R'
+      }).then(data => {
+        this.seeAllSelectedOrders.splice(index, 1);
+      })
+    }
   }
 
   getAllorder() {

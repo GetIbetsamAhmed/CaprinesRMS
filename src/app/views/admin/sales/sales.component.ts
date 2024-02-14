@@ -96,13 +96,29 @@ export class SalesComponent implements OnInit {
     this.childModal.hide();
   }
 
+  createID() {
+    let date = new Date().getTime().toString();
+    date = date.substring(date.length - 6);
+    return date
+  }
+
   createOrder() {
     const objParam = {
+      orderID: this.createID(),
       orderDate: JSON.stringify(new Date()),
       orderProduct: this.orderCart,
       orderSummary: this.objSummary,
       orderStatus: "P"
     }
+    // this.objFirebaseService.addDataIntoTable("userLogin", {
+    //   userID: this.createID(),
+    //   userName: 'Ibtesam Ahmed',
+    //   userPassword: "programmer",
+    //   userRole: ['order', 'sales', 'category', 'product'],
+    //   userNumber: "03339107704"
+    // }).then(data => {
+    //   this.reset();
+    // })
     this.objFirebaseService.addDataIntoTable("salesOrder", objParam).then(data => {
       this.reset();
     })
