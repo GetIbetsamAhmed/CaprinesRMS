@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/service/firebase.service';
+declare var $: any; // Declare jQuery
 
 @Component({
   selector: 'app-sales',
@@ -29,6 +30,14 @@ export class SalesComponent implements OnInit {
   ngOnInit(): void {
     this.getAllproduct();
     this.getAllcategory();
+  }
+
+  closeModel() {
+    $('#exampleModal').modal('hide');
+  }
+
+  openPrintModel() {
+    $('#printModal').modal('show');
   }
 
   getAllproduct() {
@@ -93,7 +102,7 @@ export class SalesComponent implements OnInit {
       billAmount: 0
     };
     this.orderCart = [];
-    this.childModal.hide();
+    this.closeModel();
   }
 
   createID() {
@@ -121,6 +130,7 @@ export class SalesComponent implements OnInit {
     // })
     this.objFirebaseService.addDataIntoTable("salesOrder", objParam).then(data => {
       this.reset();
+      // this.openPrintModel();
     })
   }
 
@@ -145,4 +155,26 @@ export class SalesComponent implements OnInit {
       }
     })
   }
+
+
+  // Print Working in progress
+  showPrint() {
+    this.isPrintShow = true;
+  }
+
+  isPrintShow = false;
+  currentDate: string = new Date().toLocaleDateString();
+  tableNumber: number = 1;
+  items: any[] = [
+    { name: 'Pizza', price: 10.00 },
+    { name: 'Salad', price: 5.00 },
+    { name: 'Salad', price: 5.00 },
+    { name: 'Salad', price: 5.00 }
+  ];
+  getTotal(): number {
+    return this.items.reduce((total, item) => total + item.price, 0);
+  }
+  // Print Working in progress
+
+
 }

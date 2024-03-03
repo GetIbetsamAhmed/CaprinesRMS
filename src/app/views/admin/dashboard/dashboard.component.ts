@@ -18,6 +18,11 @@ export class DashboardComponent implements OnInit {
     this.getAllorder();
   }
 
+  dateFormat(date: any) {
+    debugger;
+    return date.replace(/^"(.*)"$/, '$1');
+  }
+
   goBack() {
     this.seeAllSelectedOrders = [];
     this.seeMore = '';

@@ -1,17 +1,17 @@
-<div class="flex flex-wrap">
-    <div class="w-full lg:w-8/12 px-4">
+<div *ngIf="!isPrintShow" class="flex flex-wrap">
+    <div class="w-full lg:w-8/12 px-4 ">
         <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
-            <div class="flex flex-wrap">
-                <div *ngFor="let objCat of categoryList" class="w-full lg:w-3/12 px-4" style="margin: 20px;">
+            <div class="flex flex-wrap justify-center">
+                <div style="padding: 10px;" *ngFor="let objCat of categoryList">
                     <h2 (click)="filterCategory(objCat)"
-                        style=" color:white;background-color: #991b1b; padding: 5px; border-radius: 10px; text-align: center;cursor: pointer">
+                        style=" color:white;background-color: #991b1b; padding: 7px; border-radius: 5px; text-align: center;cursor: pointer">
                         {{objCat.catName}}</h2>
                 </div>
 
             </div>
-            <div class="flex flex-wrap">
-
-                <div *ngFor="let objProduct of filterProductList" class="w-full lg:w-3/12 px-4" style="margin: 20px;">
+            <hr style="border:#991b1b solid 2px">
+            <div class="flex flex-wrap justify-center">
+                <div style="padding: 10px;" *ngFor="let objProduct of filterProductList">
                     <img (click)="productClick(objProduct)" src="{{objProduct.productImg}}" height="180px" width="180px"
                         style="border-top-right-radius: 10px; border-top-left-radius: 10px;" />
                     <h2 (click)="productClick(objProduct)"
@@ -56,7 +56,13 @@
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                 <h2 style="font-size: 18px;">{{objCart.quantity}}</h2>
                             </td>
-                            <td (click)="delete(objCart)">D</td>
+                            <td>
+                                <button (click)="delete(objCart)"
+                                    class="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button">
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -95,19 +101,69 @@
                 <h2 style="font-size: 18px; margin-bottom: 3px;"><b>Product Total Amount :</b>
                     {{this.objSummary.billAmount}}</h2>
 
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" *ngIf="this.orderCart.length > 0"
+                    class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                    style="background-color: #991b1b;" type="button">
+                    Close
+                </button>
+                <button *ngIf="this.orderCart.length > 0"
+                    class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                    style="background-color: #991b1b;" type="button">
+                    <p (click)="createOrder()">Complete Order</p>
+                </button>
+                </div>
+                </div>
+                </div>
+                </div>
+                
+                
+                <!-- Modal -->
+                <div class="modal fade" #childModal id="printModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><b>Order Confirmation</b></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <button (click)="showPrint()"
+                                    class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                                    style="background-color: #991b1b;" type="button">
+                                    Print
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" *ngIf="this.orderCart.length > 0"
-                            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                            style="background-color: #991b1b;" type="button">
-                            Close
-                        </button>
-                        <button data-dismiss="modal" *ngIf="this.orderCart.length > 0"
-                            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                            style="background-color: #991b1b;" type="button">
-                            <p (click)="createOrder()">Complete Order</p>
-                        </button>
+                </div>
+                
+                
+                <div *ngIf="isPrintShow" class="container">
+                    <div class="header">
+                        <h2>Restaurant Name</h2>
+                        <p>Address, City, Country</p>
                     </div>
+                    <div class="bill-info">
+                        <h4>Bill Information</h4>
+                        <p>Date: <span>{{ currentDate }}</span></p>
+                        <p>Table: <span>{{ tableNumber }}</span></p>
                     </div>
+                    <div class="items">
+                        <h4>Items</h4>
+                        <div class="item" *ngFor="let item of items">
+                            <span>{{ item.name }}</span>
+                            <span>{{ item.price | currency }}</span>
+                        </div>
+                        <div class="item total">
+                            <span>Total</span>
+                            <span>{{ getTotal() | currency }}</span>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <p>Thank you for dining with us!</p>
                     </div>
                     </div>

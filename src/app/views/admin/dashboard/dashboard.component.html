@@ -5,7 +5,7 @@
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 class="font-semibold text-base text-blueGray-700">All Order</h3>
+              <h2 class="font-semibold text-2xl text-blueGray-700">All Order</h2>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
             <tbody>
               <tr *ngFor="let allOrders of todayOrder">
                 <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  {{allOrders.orderDate}}
+                  {{this.dateFormat(allOrders.orderDate) | date: 'short'}}
                 </th>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {{allOrders.orderProduct.length}}
@@ -61,11 +61,11 @@
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 class="font-semibold text-base text-blueGray-700">Pending Order</h3>
+              <h3 class="font-semibold text-2xl text-blueGray-700">Pending Order</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               <button (click)="this.seeAll('P')"
-                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                class="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
                 See all
               </button>
@@ -99,7 +99,7 @@
             <tbody>
               <tr *ngFor="let allOrders of pendingOrder">
                 <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  {{allOrders.orderDate}}
+                  {{this.dateFormat(allOrders.orderDate) | date: 'short'}}
                 </th>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {{allOrders.orderProduct.length}}
@@ -126,11 +126,11 @@
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 class="font-semibold text-base text-blueGray-700">Completed Orders</h3>
+              <h3 class="font-semibold text-2xl text-blueGray-700">Completed Orders</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               <button (click)="this.seeAll('C')"
-                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                class="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
                 See all
               </button>
@@ -164,7 +164,7 @@
             <tbody>
               <tr *ngFor="let allOrders of completedOrder">
                 <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  {{allOrders.orderDate}}
+                  {{this.dateFormat(allOrders.orderDate) | date: 'short'}}
                 </th>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {{allOrders.orderProduct.length}}
@@ -189,11 +189,11 @@
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 class="font-semibold text-base text-blueGray-700">Cenceled Orders</h3>
+              <h3 class="font-semibold text-2xl text-blueGray-700">Cenceled Orders</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               <button (click)="this.seeAll('R')"
-                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                class="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
                 See all
               </button>
@@ -227,7 +227,7 @@
             <tbody>
               <tr *ngFor="let allOrders of rejectedOrder">
                 <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  {{allOrders.orderDate}}
+                  {{this.dateFormat(allOrders.orderDate) | date: 'short'}}
                 </th>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {{allOrders.orderProduct.length}}
@@ -256,11 +256,11 @@
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 class="font-semibold text-base text-blueGray-700">{{this.seeMore}}</h3>
+              <h3 class="font-semibold text-2xl text-blueGray-700">{{this.seeMore}}</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               <button (click)="this.goBack()"
-                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                class="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
                 Back
               </button>
@@ -316,7 +316,7 @@
                   {{allOrders.orderID}}
                 </td>
                 <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  {{allOrders.orderDate}}
+                  {{this.dateFormat(allOrders.orderDate) | date: 'short'}}
                 </th>
                 <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {{allOrders.orderProduct.length}}
@@ -331,7 +331,7 @@
                 <td *ngIf="this.seeMore === 'All Pending Orders'"
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <button (click)="this.updateStatus('C',allOrders.key,rowIndex)"
-                    class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    class="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button">
                     Mark Complete
                   </button>
@@ -339,7 +339,7 @@
                 <td *ngIf="this.seeMore === 'All Pending Orders'"
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <button (click)="this.updateStatus('R',allOrders.key,rowIndex)"
-                    class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    class="bg-red-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button">
                     Mark Cencel
                   </button>
