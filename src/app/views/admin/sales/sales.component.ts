@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/service/firebase.service';
+import { HttpcallsService } from 'src/app/service/http-service/httpcalls.service';
 declare var $: any; // Declare jQuery
 
 @Component({
@@ -25,7 +26,10 @@ export class SalesComponent implements OnInit {
     catName: "All Category",
     key: "All"
   }];
-  constructor(public objFirebaseService: FirebaseService) { }
+  constructor(
+    public objFirebaseService: FirebaseService,
+    public apiServices: HttpcallsService
+  ) { }
 
   ngOnInit(): void {
     this.getAllproduct();
@@ -129,10 +133,13 @@ export class SalesComponent implements OnInit {
     //   this.reset();
     // })
     this.objFirebaseService.addDataIntoTable("salesOrder", objParam).then(data => {
+      const tokenFCM = localStorage.getItem("FCMToken");
+      this.apiServices.postNotifications("New Order Created", `Total Bill Amount is : ${this.objSummary.billAmount}`, tokenFCM);
       this.reset();
       // this.openPrintModel();
     })
   }
+
 
   delete(objCartItem) {
     const index = this.orderCart.findIndex(data => data.key === objCartItem.key);
